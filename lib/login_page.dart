@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:login_page/languages/string_items.dart';
 
 class LoginPageView extends StatefulWidget {
@@ -10,13 +11,16 @@ class LoginPageView extends StatefulWidget {
 
 class _LoginPageViewState extends State<LoginPageView> {
   FocusNode focusNodeTextField = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ProjectColors().concrete,
+      backgroundColor: ProjectColors().pampas,
       appBar: AppBar(
         title: const Text(StringItems.appBarTitle),
-        backgroundColor: ProjectColors().dullLavender,
+        backgroundColor: ProjectColors().bone,
+        foregroundColor: ProjectColors().blueCharcoal,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: ListView.builder(
         itemCount: 1,
@@ -30,6 +34,8 @@ class _LoginPageViewState extends State<LoginPageView> {
                   child: _UtilityTextField(
                     inputDecoration: ProjectInputDecorations.userNameDecoration,
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    obscureText: false,
                   ),
                 ),
               ),
@@ -39,6 +45,8 @@ class _LoginPageViewState extends State<LoginPageView> {
                   child: _UtilityTextField(
                     inputDecoration: ProjectInputDecorations.passwordDecoration,
                     keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    obscureText: true,
                   ),
                 ),
               ),
@@ -51,32 +59,7 @@ class _LoginPageViewState extends State<LoginPageView> {
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ProjectColors().dullLavender,
-      ),
-      onPressed: () {},
-      child: Padding(
-        padding: ProjectPaddings().paddingSymetric,
-        child: Text(
-          StringItems.loginButton,
-          style: Theme.of(context)
-              .textTheme
-              .subtitle1
-              ?.copyWith(color: ProjectColors().concrete),
-        ),
-      ),
-    );
-  }
-}
-
+// Circle profile photo
 class _LoginProfile extends StatelessWidget {
   const _LoginProfile({
     Key? key,
@@ -87,31 +70,69 @@ class _LoginProfile extends StatelessWidget {
     return Center(
       child: Padding(
         padding: ProjectPaddings().paddingOnly,
-        child: Card(
-            shape: const CircleBorder(),
-            child: Padding(
-              padding: ProjectPaddings().paddingAllSpecial,
-              child: const Icon(Icons.person, size: 72),
-            )),
+        child: Container(
+          width: 200,
+          height: 200,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                image: AssetImage(StringItems.loginProfile), fit: BoxFit.fill),
+          ),
+        ),
       ),
     );
   }
 }
 
+// Textfield properties
 class _UtilityTextField extends StatelessWidget {
   const _UtilityTextField({
     Key? key,
     required this.inputDecoration,
     required this.keyboardType,
+    required this.textInputAction,
+    required this.obscureText,
   }) : super(key: key);
   final InputDecoration inputDecoration;
   final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       decoration: inputDecoration,
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      cursorColor: ProjectColors().concrete,
+      obscureText: obscureText,
+    );
+  }
+}
+
+// Elevated Login button
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ProjectColors().softAmber,
+      ),
+      onPressed: () {},
+      child: Padding(
+        padding: ProjectPaddings().paddingSymetric,
+        child: Text(
+          StringItems.loginButton,
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(color: ProjectColors().blueCharcoal),
+        ),
+      ),
     );
   }
 }
@@ -121,8 +142,9 @@ class ProjectInputDecorations {
       hintText: StringItems.userName, prefixIcon: Icon(Icons.person_add));
 
   static const passwordDecoration = InputDecoration(
-      hintText: StringItems.password,
-      prefixIcon: Icon(Icons.password_outlined));
+    hintText: StringItems.password,
+    prefixIcon: Icon(Icons.password_outlined),
+  );
 }
 
 class ProjectPaddings {
@@ -135,5 +157,8 @@ class ProjectPaddings {
 
 class ProjectColors {
   final concrete = const Color(0xffF2F2F2);
-  final dullLavender = const Color(0xff88A3E2);
+  final bone = const Color(0xffE4D9C5);
+  final pampas = const Color(0xffEDEAE3);
+  final softAmber = const Color(0xffD3C1B3);
+  final blueCharcoal = const Color(0xff010A26);
 }

@@ -18,6 +18,12 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           centerTitle: true,
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: ProjectColors().bone,
+          iconColor: ProjectColors().blueCharcoal,
+          hintStyle: TextStyle(color: ProjectColors().blueCharcoal),
+        ),
       ),
       home: const LoginPageView(),
     );
