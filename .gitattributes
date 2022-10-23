@@ -1,4 +1,2 @@
-*.c++ linguist-detectable=false
-*.cmake linguist-detectable=false
-*.dart linguist-language=Dart 
-*.dart linguist-detectable=true 
+$ cat .gitattributes
+*.rb linguist-language=Dart
