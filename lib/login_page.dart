@@ -42,7 +42,9 @@ class _LoginPageViewState extends State<LoginPageView> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [_ForgotPassTextButton()],
+                children: const [
+                  _ForgotPassTextButton(),
+                ],
               ),
               Padding(
                 padding: ProjectPaddings().buttonPadding,
@@ -146,13 +148,14 @@ class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: ProjectColors().mineShaft,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)))),
       onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ProjectColors().mineShaft,
+        shape: RoundedRectangleBorder(
+            borderRadius: ProjectBorders().circularBorder),
+      ),
       child: Padding(
-        padding: ProjectPaddings().paddingSymetric,
+        padding: ProjectPaddings().textPadding,
         child: Text(
           StringItems.loginButton,
           style: Theme.of(context)
@@ -169,11 +172,11 @@ class ProjectInputDecorations {
   final userNameDecoration = InputDecoration(
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: ProjectBorders().circularBorder,
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: ProjectBorders().circularBorder,
     ),
     contentPadding: ProjectPaddings().contentPadding,
     labelText: StringItems.userName,
@@ -188,11 +191,11 @@ class ProjectInputDecorations {
     // Cevresindeki alanin rengini degistirip border verme
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: ProjectBorders().circularBorder,
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: ProjectBorders().circularBorder,
     ),
     contentPadding: ProjectPaddings().contentPadding,
     labelText: StringItems.password,
@@ -206,22 +209,21 @@ class ProjectInputDecorations {
 
 class ProjectPaddings {
   final paddingAll = const EdgeInsets.all(10);
-  final paddingAllSpecial = const EdgeInsets.all(25.0);
   final paddingVertical = const EdgeInsets.symmetric(vertical: 50);
-  final paddingSymetric =
-      const EdgeInsets.symmetric(horizontal: 40, vertical: 15);
+  final textPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 13);
   final contentPadding = const EdgeInsets.all(0.0);
   final buttonPadding = const EdgeInsets.symmetric(vertical: 30);
 }
 
 class ProjectColors {
   final concrete = const Color(0xffF2F2F2);
-  final bone = const Color(0xffE4D9C5);
-  final pampas = const Color(0xffEDEAE3);
-  final softAmber = const Color(0xffD3C1B3);
   final mineShaft = const Color(0xff262626);
   final endeavour = const Color(0xff035AA6);
   final black = Colors.black;
   final grey600 = Colors.grey.shade600;
   final grey200 = Colors.grey.shade200;
+}
+
+class ProjectBorders {
+  final circularBorder = BorderRadius.circular(10.0);
 }
