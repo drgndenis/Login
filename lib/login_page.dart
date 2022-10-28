@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:login_page/languages/string_items.dart';
 
 class LoginPageView extends StatefulWidget {
@@ -15,13 +15,7 @@ class _LoginPageViewState extends State<LoginPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ProjectColors().pampas,
-      appBar: AppBar(
-        title: const Text(StringItems.appBarTitle),
-        backgroundColor: ProjectColors().bone,
-        foregroundColor: ProjectColors().blueCharcoal,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-      ),
+      backgroundColor: ProjectColors().concrete,
       body: ListView.builder(
         itemCount: 1,
         itemBuilder: (context, index) {
@@ -30,27 +24,41 @@ class _LoginPageViewState extends State<LoginPageView> {
               const _LoginProfile(),
               Padding(
                 padding: ProjectPaddings().paddingAll,
-                child: const Card(
-                  child: _UtilityTextField(
-                    inputDecoration: ProjectInputDecorations.userNameDecoration,
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                    obscureText: false,
-                  ),
+                child: _UtilityTextField(
+                  inputDecoration: ProjectInputDecorations().userNameDecoration,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  obscureText: false,
                 ),
               ),
               Padding(
                 padding: ProjectPaddings().paddingAll,
-                child: const Card(
-                  child: _UtilityTextField(
-                    inputDecoration: ProjectInputDecorations.passwordDecoration,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    obscureText: true,
-                  ),
+                child: _UtilityTextField(
+                  inputDecoration: ProjectInputDecorations().passwordDecoration,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
+                  obscureText: true,
                 ),
               ),
-              const _LoginButton()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [_ForgotPassTextButton()],
+              ),
+              Padding(
+                padding: ProjectPaddings().buttonPadding,
+                child: const _LoginButton(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringItems.dontAccount,
+                    style: TextStyle(color: ProjectColors().grey600),
+                  ),
+                  TextButton(
+                      onPressed: () {}, child: const Text(StringItems.register))
+                ],
+              )
             ],
           );
         },
@@ -69,7 +77,7 @@ class _LoginProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: ProjectPaddings().paddingOnly,
+        padding: ProjectPaddings().paddingVertical,
         child: Container(
           width: 200,
           height: 200,
@@ -104,8 +112,27 @@ class _UtilityTextField extends StatelessWidget {
       decoration: inputDecoration,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
-      cursorColor: ProjectColors().concrete,
+      cursorColor: ProjectColors().mineShaft,
       obscureText: obscureText,
+    );
+  }
+}
+
+// forgot password Button
+class _ForgotPassTextButton extends StatelessWidget {
+  const _ForgotPassTextButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      child: Text(
+        StringItems.forgotPass,
+        style: TextStyle(
+            color: ProjectColors().endeavour, fontWeight: FontWeight.w600),
+      ),
     );
   }
 }
@@ -120,8 +147,9 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: ProjectColors().softAmber,
-      ),
+          backgroundColor: ProjectColors().mineShaft,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)))),
       onPressed: () {},
       child: Padding(
         padding: ProjectPaddings().paddingSymetric,
@@ -130,7 +158,7 @@ class _LoginButton extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .headline6
-              ?.copyWith(color: ProjectColors().blueCharcoal),
+              ?.copyWith(color: ProjectColors().concrete),
         ),
       ),
     );
@@ -138,21 +166,52 @@ class _LoginButton extends StatelessWidget {
 }
 
 class ProjectInputDecorations {
-  static const userNameDecoration = InputDecoration(
-      hintText: StringItems.userName, prefixIcon: Icon(Icons.person_add));
+  final userNameDecoration = InputDecoration(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    contentPadding: ProjectPaddings().contentPadding,
+    labelText: StringItems.userName,
+    hintText: StringItems.userOrMail,
+    prefixIcon: Icon(
+      Iconsax.user,
+      color: ProjectColors().black,
+    ),
+  );
 
-  static const passwordDecoration = InputDecoration(
+  final passwordDecoration = InputDecoration(
+    // Cevresindeki alanin rengini degistirip border verme
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    contentPadding: ProjectPaddings().contentPadding,
+    labelText: StringItems.password,
     hintText: StringItems.password,
-    prefixIcon: Icon(Icons.password_outlined),
+    prefixIcon: Icon(
+      Iconsax.key,
+      color: ProjectColors().black,
+    ),
   );
 }
 
 class ProjectPaddings {
   final paddingAll = const EdgeInsets.all(10);
   final paddingAllSpecial = const EdgeInsets.all(25.0);
-  final paddingOnly = const EdgeInsets.only(top: 25);
+  final paddingVertical = const EdgeInsets.symmetric(vertical: 50);
   final paddingSymetric =
-      const EdgeInsets.symmetric(horizontal: 25, vertical: 15);
+      const EdgeInsets.symmetric(horizontal: 40, vertical: 15);
+  final contentPadding = const EdgeInsets.all(0.0);
+  final buttonPadding = const EdgeInsets.symmetric(vertical: 30);
 }
 
 class ProjectColors {
@@ -160,5 +219,9 @@ class ProjectColors {
   final bone = const Color(0xffE4D9C5);
   final pampas = const Color(0xffEDEAE3);
   final softAmber = const Color(0xffD3C1B3);
-  final blueCharcoal = const Color(0xff010A26);
+  final mineShaft = const Color(0xff262626);
+  final endeavour = const Color(0xff035AA6);
+  final black = Colors.black;
+  final grey600 = Colors.grey.shade600;
+  final grey200 = Colors.grey.shade200;
 }

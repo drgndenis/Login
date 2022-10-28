@@ -19,11 +19,13 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
         inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: ProjectColors().bone,
-          iconColor: ProjectColors().blueCharcoal,
-          hintStyle: TextStyle(color: ProjectColors().blueCharcoal),
-        ),
+            filled: true,
+            fillColor: Colors.transparent,
+            iconColor: ProjectColors().mineShaft,
+            labelStyle: TextStyle(color: ProjectColors().mineShaft),
+            hintStyle: const TextStyle(
+              color: Colors.grey,
+            )),
       ),
       home: const LoginPageView(),
     );
