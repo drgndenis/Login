@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:login_page/languages/string_items.dart';
-import 'package:login_page/register_page.dart';
-import 'package:login_page/widgets/input_decorations.dart';
+import 'package:login_page/widgets/colors.dart';
+import 'package:login_page/widgets/paddings.dart';
 import 'package:login_page/widgets/special_button.dart';
-import 'package:login_page/widgets/textfields.dart';
+import 'package:login_page/widgets/text_fields.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -24,35 +25,56 @@ class _LoginPageViewState extends State<LoginPageView> {
         itemBuilder: (context, index) {
           return Column(
             children: [
+              // --------- Circle Login Profile Image ---------
               const _LoginProfile(),
+
+              // --------- User or Email TextField ---------
               Padding(
                 padding: ProjectPaddings().paddingAll,
                 child: UtilityTextField(
-                  inputDecoration: ProjectInputDecorations().userNameDecoration,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   obscureText: false,
+                  labelText: StringItems.userName,
+                  hintText: StringItems.userOrMail,
+                  prefixIcon: Icon(
+                    Iconsax.user,
+                    color: ProjectColors().black,
+                  ),
                 ),
               ),
+
+              // --------- Password TextField ---------
               Padding(
                 padding: ProjectPaddings().paddingAll,
                 child: UtilityTextField(
-                  inputDecoration: ProjectInputDecorations().passwordDecoration,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
                   obscureText: true,
+                  labelText: StringItems.password,
+                  hintText: StringItems.password,
+                  prefixIcon: Icon(
+                    Iconsax.key,
+                    color: ProjectColors().black,
+                  ),
                 ),
               ),
+
+              // --------- Forgot Password Button ---------
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
                   _ForgotPassTextButton(),
                 ],
               ),
+
+              // --------- Login Button ---------
               Padding(
                 padding: ProjectPaddings().buttonPadding,
                 child: const SpecialButton(),
               ),
+
+              // --------- Text and Register Button ---------
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -61,16 +83,7 @@ class _LoginPageViewState extends State<LoginPageView> {
                     style: TextStyle(color: ProjectColors().grey600),
                   ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const RegisterPageView(),
-                          ),
-                        );
-                      },
-                      child: const Text(StringItems.register))
+                      onPressed: () {}, child: const Text(StringItems.register))
                 ],
               )
             ],
@@ -81,7 +94,7 @@ class _LoginPageViewState extends State<LoginPageView> {
   }
 }
 
-// Circle profile photo
+// --------- Circle Login Profile ---------
 class _LoginProfile extends StatelessWidget {
   const _LoginProfile({
     Key? key,
@@ -106,7 +119,7 @@ class _LoginProfile extends StatelessWidget {
   }
 }
 
-// forgot password Button
+// --------- Forgot Password Button ---------
 class _ForgotPassTextButton extends StatelessWidget {
   const _ForgotPassTextButton({
     Key? key,
@@ -125,23 +138,7 @@ class _ForgotPassTextButton extends StatelessWidget {
   }
 }
 
-class ProjectPaddings {
-  final paddingAll = const EdgeInsets.all(10);
-  final paddingVertical = const EdgeInsets.symmetric(vertical: 50);
-  final textPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 13);
-  final contentPadding = const EdgeInsets.all(0.0);
-  final buttonPadding = const EdgeInsets.symmetric(vertical: 30);
-}
-
-class ProjectColors {
-  final concrete = const Color(0xffF2F2F2);
-  final mineShaft = const Color(0xff262626);
-  final endeavour = const Color(0xff035AA6);
-  final black = Colors.black;
-  final grey600 = Colors.grey.shade600;
-  final grey200 = Colors.grey.shade200;
-}
-
+// --------- Borders ---------
 class ProjectBorders {
   final circularBorder = BorderRadius.circular(10.0);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/languages/string_items.dart';
+import 'package:login_page/widgets/colors.dart';
 import 'login_page.dart';
 
 void main() {
@@ -9,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,13 +19,14 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
         inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: Colors.transparent,
-            iconColor: ProjectColors().mineShaft,
-            labelStyle: TextStyle(color: ProjectColors().mineShaft),
-            hintStyle: const TextStyle(
-              color: Colors.grey,
-            )),
+          filled: true,
+          fillColor: Colors.transparent,
+          iconColor: ProjectColors().mineShaft,
+          labelStyle: TextStyle(color: ProjectColors().mineShaft),
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
       ),
       home: const LoginPageView(),
     );

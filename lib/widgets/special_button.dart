@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/widgets/paddings.dart';
 import '../languages/string_items.dart';
 import '../login_page.dart';
+import 'colors.dart';
 
-// Elevated Login button
+// --------- Elevated Button ---------
 class SpecialButton extends StatelessWidget {
   const SpecialButton({
     Key? key,
