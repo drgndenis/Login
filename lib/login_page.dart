@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:login_page/languages/string_items.dart';
+import 'package:login_page/register_page.dart';
+import 'package:login_page/widgets/input_decorations.dart';
+import 'package:login_page/widgets/special_button.dart';
+import 'package:login_page/widgets/textfields.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -24,7 +27,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               const _LoginProfile(),
               Padding(
                 padding: ProjectPaddings().paddingAll,
-                child: _UtilityTextField(
+                child: UtilityTextField(
                   inputDecoration: ProjectInputDecorations().userNameDecoration,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
@@ -33,7 +36,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               ),
               Padding(
                 padding: ProjectPaddings().paddingAll,
-                child: _UtilityTextField(
+                child: UtilityTextField(
                   inputDecoration: ProjectInputDecorations().passwordDecoration,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
@@ -48,7 +51,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               ),
               Padding(
                 padding: ProjectPaddings().buttonPadding,
-                child: const _LoginButton(),
+                child: const SpecialButton(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +61,16 @@ class _LoginPageViewState extends State<LoginPageView> {
                     style: TextStyle(color: ProjectColors().grey600),
                   ),
                   TextButton(
-                      onPressed: () {}, child: const Text(StringItems.register))
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const RegisterPageView(),
+                          ),
+                        );
+                      },
+                      child: const Text(StringItems.register))
                 ],
               )
             ],
@@ -94,32 +106,6 @@ class _LoginProfile extends StatelessWidget {
   }
 }
 
-// Textfield properties
-class _UtilityTextField extends StatelessWidget {
-  const _UtilityTextField({
-    Key? key,
-    required this.inputDecoration,
-    required this.keyboardType,
-    required this.textInputAction,
-    required this.obscureText,
-  }) : super(key: key);
-  final InputDecoration inputDecoration;
-  final TextInputType keyboardType;
-  final TextInputAction textInputAction;
-  final bool obscureText;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      decoration: inputDecoration,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      cursorColor: ProjectColors().mineShaft,
-      obscureText: obscureText,
-    );
-  }
-}
-
 // forgot password Button
 class _ForgotPassTextButton extends StatelessWidget {
   const _ForgotPassTextButton({
@@ -137,74 +123,6 @@ class _ForgotPassTextButton extends StatelessWidget {
       ),
     );
   }
-}
-
-// Elevated Login button
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ProjectColors().mineShaft,
-        shape: RoundedRectangleBorder(
-            borderRadius: ProjectBorders().circularBorder),
-      ),
-      child: Padding(
-        padding: ProjectPaddings().textPadding,
-        child: Text(
-          StringItems.loginButton,
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              ?.copyWith(color: ProjectColors().concrete),
-        ),
-      ),
-    );
-  }
-}
-
-class ProjectInputDecorations {
-  final userNameDecoration = InputDecoration(
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
-      borderRadius: ProjectBorders().circularBorder,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
-      borderRadius: ProjectBorders().circularBorder,
-    ),
-    contentPadding: ProjectPaddings().contentPadding,
-    labelText: StringItems.userName,
-    hintText: StringItems.userOrMail,
-    prefixIcon: Icon(
-      Iconsax.user,
-      color: ProjectColors().black,
-    ),
-  );
-
-  final passwordDecoration = InputDecoration(
-    // Cevresindeki alanin rengini degistirip border verme
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: ProjectColors().black, width: 1.5),
-      borderRadius: ProjectBorders().circularBorder,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: ProjectColors().grey200, width: 2),
-      borderRadius: ProjectBorders().circularBorder,
-    ),
-    contentPadding: ProjectPaddings().contentPadding,
-    labelText: StringItems.password,
-    hintText: StringItems.password,
-    prefixIcon: Icon(
-      Iconsax.key,
-      color: ProjectColors().black,
-    ),
-  );
 }
 
 class ProjectPaddings {
