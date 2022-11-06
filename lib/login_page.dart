@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:login_page/languages/string_items.dart';
+import 'package:login_page/signup_page.dart';
 import 'package:login_page/widgets/colors.dart';
 import 'package:login_page/widgets/paddings.dart';
 import 'package:login_page/widgets/special_button.dart';
@@ -71,10 +72,10 @@ class _LoginPageViewState extends State<LoginPageView> {
               // --------- Login Button ---------
               Padding(
                 padding: ProjectPaddings().buttonPadding,
-                child: const SpecialButton(),
+                child: const SpecialButton(textData: StringItems.login),
               ),
 
-              // --------- Text and Register Button ---------
+              // --------- Text and Sign Up Button ---------
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -83,7 +84,14 @@ class _LoginPageViewState extends State<LoginPageView> {
                     style: TextStyle(color: ProjectColors().grey600),
                   ),
                   TextButton(
-                      onPressed: () {}, child: const Text(StringItems.register))
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const RegisterPageView()));
+                      },
+                      child: const Text(StringItems.signUp))
                 ],
               )
             ],

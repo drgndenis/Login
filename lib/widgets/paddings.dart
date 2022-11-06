@@ -7,4 +7,5 @@ class ProjectPaddings {
   final textPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 13);
   final contentPadding = const EdgeInsets.all(0.0);
   final buttonPadding = const EdgeInsets.symmetric(vertical: 30);
+  final signUpPadding = const EdgeInsets.symmetric(vertical: 5);
 }

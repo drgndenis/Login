@@ -8,7 +8,10 @@ import 'colors.dart';
 class SpecialButton extends StatelessWidget {
   const SpecialButton({
     Key? key,
+    required this.textData,
   }) : super(key: key);
+
+  final String textData;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class SpecialButton extends StatelessWidget {
       child: Padding(
         padding: ProjectPaddings().textPadding,
         child: Text(
-          StringItems.loginButton,
+          textData,
           style: Theme.of(context)
               .textTheme
               .headline6

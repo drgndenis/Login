@@ -15,8 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: StringItems.materialAppTitle,
       theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           centerTitle: true,
+          backgroundColor: ProjectColors().concrete,
+          foregroundColor: ProjectColors().black,
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
